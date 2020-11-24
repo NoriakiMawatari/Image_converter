@@ -43,11 +43,12 @@ if __name__ == '__main__':
 
     for file in os.listdir(cwd):
         filenames = os.path.splitext(file)
-        if filenames[1] == '.jpg':
+        if filenames[1] == '.jpg' or filenames[1] == '.JPG' or filenames[1] == '.eps':
             img = Image.open(f'{cwd}/{file}')
             cleanName = filenames[0]
             if eps_enable:
-                img.save(f'{new_cwd}/{cleanName}.eps', 'eps')
+                img.save(f'{new_cwd}/{cleanName}.eps', 'EPS')
+
             else:
-                img.save(f'{new_cwd}/{cleanName}.png', 'png')
+                img.save(f'{new_cwd}/{cleanName}.png', 'PNG')
     print('Successful convertion!')
