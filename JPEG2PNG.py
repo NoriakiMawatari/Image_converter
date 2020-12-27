@@ -1,11 +1,10 @@
 '''
 Image converter from JPEG to PNG or EPS format
 Description:
-The code converts all the .jpg files in a provided source folder into .png or .eps format and storages
+The code converts all the .jpg files in a provided source folder into .png format and storages
 them in a target folder. If target folder doesn´t exist, it'll be created.
-Script execution meant to be in the terminal:
+Script execution meant to be in terminal:
 JPEG to PNG: python3 JPEG2PNG.py images\directory\name new\directory\name
-JPEG to EPS: python3 JPEG2PNG.py images\directory\name new\directory\name True/1
 '''
 
 import sys
@@ -40,15 +39,11 @@ if __name__ == '__main__':
         os.mkdir(sys.argv[2])
     else:
         print('Converting files...')
-
+    formats = ['.jpg', '.JPG', '.JPEG', '.jpeg']
     for file in os.listdir(cwd):
         filenames = os.path.splitext(file)
-        if filenames[1] == '.jpg' or filenames[1] == '.JPG' or filenames[1] == '.eps':
+        if filenames[1] in formats:
             img = Image.open(f'{cwd}/{file}')
             cleanName = filenames[0]
-            if eps_enable:
-                img.save(f'{new_cwd}/{cleanName}.eps', 'EPS')
-
-            else:
-                img.save(f'{new_cwd}/{cleanName}.png', 'PNG')
+            img.save(f'{new_cwd}/{cleanName}.png', 'PNG')
     print('Successful convertion!')
